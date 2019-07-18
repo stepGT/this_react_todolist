@@ -35,6 +35,11 @@ class ToDoList extends Component {
     });
   }
 
+  toggleTaskStatus(task, e) {
+    task.isDone = !task.isDone;
+    this.forceUpdate();
+  }
+
   render() {
     return (
         <div className="react_todolist">
@@ -43,9 +48,10 @@ class ToDoList extends Component {
           </div>
           <div className="react_todolist__tasks">
             {this.state.tasks.map((task, key) => {
-              return <div key={key} className="react_todolist__task">
-                <span onClick={this.deleteTask.bind(this, task)} className="react_todolist__delete">x</span>
+              return <div key={key} className={task.isDone ? 'react_todolist__task done' : 'react_todolist__task'}>
+                <input onClick={this.toggleTaskStatus.bind(this, task)} type="checkbox"/>
                 {task.title}
+                <span onClick={this.deleteTask.bind(this, task)} className="react_todolist__delete">x</span>
               </div>
             })}
           </div>

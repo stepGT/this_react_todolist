@@ -14,4 +14,7 @@
   &__task:hover &__delete {
     display: inline-block;
   }
+  &__task.done {
+    text-decoration: line-through;
+  }
 }
