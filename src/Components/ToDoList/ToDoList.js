@@ -21,7 +21,7 @@ class ToDoList extends Component {
   createNewTask(e) {
     if (e.key === 'Enter') {
       this.setState({
-        tasks: [...this.state.tasks, {title: e.currentTarget.value}]
+        tasks: [...this.state.tasks, {title: e.currentTarget.value, isDone: false}]
       });
       e.currentTarget.value = '';
     }
