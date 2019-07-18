@@ -5,14 +5,23 @@ class ToDoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: ['Learn JS', 'Learn ReactJS']
-    };
+      tasks: [
+        {
+          title: 'Learn JS',
+          isDone: false
+        },
+        {
+          title: 'Learn ReactJS',
+          isDone: false
+        }
+      ]
+    }
   }
 
   createNewTask(e) {
     if (e.key === 'Enter') {
       this.setState({
-        tasks: [...this.state.tasks, e.currentTarget.value]
+        tasks: [...this.state.tasks, {title: e.currentTarget.value}]
       });
       e.currentTarget.value = '';
     }
@@ -35,8 +44,8 @@ class ToDoList extends Component {
           <div className="react_todolist__tasks">
             {this.state.tasks.map((task, key) => {
               return <div key={key} className="react_todolist__task">
-                {task}
                 <span onClick={this.deleteTask.bind(this, task)} className="react_todolist__delete">x</span>
+                {task.title}
               </div>
             })}
           </div>
