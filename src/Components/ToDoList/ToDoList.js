@@ -18,6 +18,14 @@ class ToDoList extends Component {
     }
   }
 
+  deleteTask(task, e) {
+    this.setState({
+      tasks: this.state.tasks.filter((t) => {
+        return t !== task
+      })
+    });
+  }
+
   render() {
     return (
         <div className="react_todolist">
@@ -25,9 +33,10 @@ class ToDoList extends Component {
             <input onKeyPress={this.createNewTask.bind(this)} type="text"/>
           </div>
           <div className="react_todolist__tasks">
-            {this.state.tasks.map((el, key) => {
+            {this.state.tasks.map((task, key) => {
               return <div key={key} className="react_todolist__task">
-                {el}
+                {task}
+                <span onClick={this.deleteTask.bind(this, task)} className="react_todolist__delete">x</span>
               </div>
             })}
           </div>

@@ -4,6 +4,14 @@
   padding: 30px;
   border: 1px grey solid;
   &__task {
-
+    cursor: pointer;
+  }
+  &__delete {
+    float: right;
+    color: red;
+    display: none;
+  }
+  &__task:hover &__delete {
+    display: inline-block;
   }
 }
