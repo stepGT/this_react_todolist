@@ -11,12 +11,10 @@ class ToDoList extends Component {
 
   createNewTask(e) {
     if (e.key === 'Enter') {
-      const newTasksList = this.state.tasks;
-      newTasksList.push(e.currentTarget.value);
-      e.currentTarget.value = '';
       this.setState({
-        tasks: newTasksList
+        tasks: [...this.state.tasks, e.currentTarget.value]
       });
+      e.currentTarget.value = '';
     }
   }
 
