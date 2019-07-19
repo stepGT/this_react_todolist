@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './ToDoList.scss';
+import Task from './Task';
 
 class ToDoList extends Component {
   constructor(props) {
@@ -21,23 +22,13 @@ class ToDoList extends Component {
   createNewTask(e) {
     if (e.key === 'Enter') {
       this.setState({
-        tasks: [...this.state.tasks, {title: e.currentTarget.value, isDone: false}]
+        tasks: [...this.state.tasks, {
+          title: e.currentTarget.value,
+          isDone: false
+        }]
       });
       e.currentTarget.value = '';
     }
-  }
-
-  deleteTask(task, e) {
-    this.setState({
-      tasks: this.state.tasks.filter((t) => {
-        return t !== task
-      })
-    });
-  }
-
-  toggleTaskStatus(task, e) {
-    task.isDone = !task.isDone;
-    this.forceUpdate();
   }
 
   render() {
@@ -48,11 +39,7 @@ class ToDoList extends Component {
           </div>
           <div className="react_todolist__tasks">
             {this.state.tasks.map((task, key) => {
-              return <div key={key} className={task.isDone ? 'react_todolist__task done' : 'react_todolist__task'}>
-                <input onClick={this.toggleTaskStatus.bind(this, task)} type="checkbox"/>
-                {task.title}
-                <span onClick={this.deleteTask.bind(this, task)} className="react_todolist__delete">x</span>
-              </div>
+              return <Task key={key} task={task}/>
             })}
           </div>
         </div>
