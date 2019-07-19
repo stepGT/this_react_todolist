@@ -23,7 +23,7 @@ class Task extends Component {
     let isDone = this.state.task.isDone ? 'react_todolist__task done' : 'react_todolist__task';
     return (
         <div className={isDone}>
-          <input onClick={this.toggleTaskStatus.bind(this)} type="checkbox"/>
+          <input checked={this.state.task.isDone} onClick={this.toggleTaskStatus.bind(this)} type="checkbox"/>
           {this.state.task.title}
           <span onClick={this.deleteTask.bind(this)} className="react_todolist__delete">x</span>
         </div>

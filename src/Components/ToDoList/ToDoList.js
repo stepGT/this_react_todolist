@@ -20,10 +20,11 @@ class ToDoList extends Component {
   }
 
   deleteTask(task) {
+    let newTasksList = this.state.tasks.filter((t) => {
+      return t !== task
+    });
     this.setState({
-      tasks: this.state.tasks.filter((t) => {
-        return t !== task
-      })
+      tasks: newTasksList
     });
   }
 
