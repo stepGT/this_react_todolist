@@ -5,13 +5,16 @@ import Task from './Task';
 class ToDoList extends Component {
   constructor(props) {
     super(props);
+    this.newIndex = 2;
     this.state = {
       tasks: [
         {
+          id: 1,
           title: 'Learn JS',
           isDone: false
         },
         {
+          id: 2,
           title: 'Learn ReactJS',
           isDone: false
         }
@@ -19,9 +22,9 @@ class ToDoList extends Component {
     }
   }
 
-  deleteTask(task) {
+  deleteTask(taskId) {
     let newTasksList = this.state.tasks.filter((t) => {
-      return t !== task
+      return t.id !== taskId
     });
     this.setState({
       tasks: newTasksList
@@ -33,10 +36,12 @@ class ToDoList extends Component {
       this.setState({
         tasks: [...this.state.tasks, {
           title: e.currentTarget.value,
-          isDone: false
+          isDone: false,
+          id: this.newIndex
         }]
       });
       e.currentTarget.value = '';
+      this.newIndex++;
     }
   }
 
@@ -47,8 +52,8 @@ class ToDoList extends Component {
             <input onKeyPress={this.createNewTask.bind(this)} type="text"/>
           </div>
           <div className="react_todolist__tasks">
-            {this.state.tasks.map((task, key) => {
-              return <Task deleteCallback={this.deleteTask.bind(this)} key={key} task={task}/>
+            {this.state.tasks.map((task) => {
+              return <Task deleteCallback={this.deleteTask.bind(this)} key={task.id} task={task}/>
             })}
           </div>
         </div>
