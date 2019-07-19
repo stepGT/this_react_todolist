@@ -19,6 +19,14 @@ class ToDoList extends Component {
     }
   }
 
+  deleteTask(task) {
+    this.setState({
+      tasks: this.state.tasks.filter((t) => {
+        return t !== task
+      })
+    });
+  }
+
   createNewTask(e) {
     if (e.key === 'Enter') {
       this.setState({
@@ -39,7 +47,7 @@ class ToDoList extends Component {
           </div>
           <div className="react_todolist__tasks">
             {this.state.tasks.map((task, key) => {
-              return <Task key={key} task={task}/>
+              return <Task deleteCallback={this.deleteTask.bind(this)} key={key} task={task}/>
             })}
           </div>
         </div>

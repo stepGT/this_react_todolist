@@ -4,14 +4,19 @@ class Task extends Component {
   constructor(props) {
     super(props);
     this.state = {task: props.task}
+    this.parentDeleteCallback = props.deleteCallback;
   }
 
-  deleteTask(e) {
-
+  deleteTask() {
+    this.parentDeleteCallback(this.state.task);
   }
 
-  toggleTaskStatus(e) {
-
+  toggleTaskStatus() {
+    let newTask = {
+      ...this.state.task,
+      isDone: !this.state.task.isDone
+    };
+    this.setState({task: newTask});
   }
 
   render() {
