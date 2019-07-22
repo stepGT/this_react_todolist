@@ -5,6 +5,11 @@
   border: 1px grey solid;
   &__task {
     cursor: pointer;
+    padding: 5px;
+    margin-top: 5px;
+  }
+  &__task:hover {
+    background-color: lightgrey;
   }
   &__delete {
     float: right;
@@ -16,5 +21,15 @@
   }
   &__task.done {
     text-decoration: line-through;
+  }
+  &__footer {
+    div {
+      padding: 3px;
+    }
+    &_buttons button.active {
+      border: 2px solid black;
+    }
+    display: flex;
+    margin-top: 10px;
   }
 }

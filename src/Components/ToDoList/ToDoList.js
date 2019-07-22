@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './ToDoList.scss';
 import Task from './Task';
+import ToDoListFooter from './ToDoListFooter';
 
 class ToDoList extends Component {
   constructor(props) {
@@ -56,6 +57,7 @@ class ToDoList extends Component {
               return <Task deleteCallback={this.deleteTask.bind(this)} key={task.id} task={task}/>
             })}
           </div>
+          <ToDoListFooter/>
         </div>
     );
   };
