@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import './ToDoList.scss';
 import ToDoListTask from './ToDoListTask';
 import ToDoListFooter from './ToDoListFooter';
+import ToDoListTaskCreator from './ToDoListTaskCreator';
 
 class ToDoList extends Component {
   constructor(props) {
     super(props);
-    this.newIndex = 2;
     this.state = {
       tasks: [
         {
@@ -32,26 +32,16 @@ class ToDoList extends Component {
     });
   }
 
-  createNewTask(e) {
-    if (e.key === 'Enter') {
-      this.setState({
-        tasks: [...this.state.tasks, {
-          title: e.currentTarget.value,
-          isDone: false,
-          id: this.newIndex
-        }]
-      });
-      e.currentTarget.value = '';
-      this.newIndex++;
-    }
+  parentCreateNewTask(task) {
+    this.setState({
+      tasks: [...this.state.tasks, task]
+    });
   }
 
   render() {
     return (
         <div className="react_todolist">
-          <div className="react_todolist__header">
-            <input onKeyPress={this.createNewTask.bind(this)} type="text"/>
-          </div>
+          <ToDoListTaskCreator parentCreateNewTask={this.parentCreateNewTask.bind(this)}/>
           <div className="react_todolist__tasks">
             {this.state.tasks.map((task) => {
               return <ToDoListTask deleteCallback={this.deleteTask.bind(this)} key={task.id} task={task}/>
