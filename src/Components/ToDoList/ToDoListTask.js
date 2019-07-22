@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Task extends Component {
+class ToDoListTask extends Component {
   constructor(props) {
     super(props);
     this.state = {task: props.task}
@@ -31,4 +31,4 @@ class Task extends Component {
   };
 }
 
-export default Task;
+export default ToDoListTask;

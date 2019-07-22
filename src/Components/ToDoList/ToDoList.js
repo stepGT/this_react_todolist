@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './ToDoList.scss';
-import Task from './Task';
+import ToDoListTask from './ToDoListTask';
 import ToDoListFooter from './ToDoListFooter';
 
 class ToDoList extends Component {
@@ -54,7 +54,7 @@ class ToDoList extends Component {
           </div>
           <div className="react_todolist__tasks">
             {this.state.tasks.map((task) => {
-              return <Task deleteCallback={this.deleteTask.bind(this)} key={task.id} task={task}/>
+              return <ToDoListTask deleteCallback={this.deleteTask.bind(this)} key={task.id} task={task}/>
             })}
           </div>
           <ToDoListFooter/>
