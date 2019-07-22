@@ -3,6 +3,7 @@ import './ToDoList.scss';
 import ToDoListTask from './ToDoListTask';
 import ToDoListFooter from './ToDoListFooter';
 import ToDoListTaskCreator from './ToDoListTaskCreator';
+import ToDoListTasksList from './ToDoListTasksList';
 
 class ToDoList extends Component {
   constructor(props) {
@@ -42,11 +43,7 @@ class ToDoList extends Component {
     return (
         <div className="react_todolist">
           <ToDoListTaskCreator parentCreateNewTask={this.parentCreateNewTask.bind(this)}/>
-          <div className="react_todolist__tasks">
-            {this.state.tasks.map((task) => {
-              return <ToDoListTask deleteCallback={this.deleteTask.bind(this)} key={task.id} task={task}/>
-            })}
-          </div>
+          <ToDoListTasksList tasks={this.state.tasks}/>
           <ToDoListFooter/>
         </div>
     );
