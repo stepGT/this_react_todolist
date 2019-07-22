@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './ToDoList.scss';
-import ToDoListTask from './ToDoListTask';
 import ToDoListFooter from './ToDoListFooter';
 import ToDoListTaskCreator from './ToDoListTaskCreator';
 import ToDoListTasksList from './ToDoListTasksList';
@@ -39,11 +38,28 @@ class ToDoList extends Component {
     });
   }
 
+  parentUpdateTask(task) {
+    const newTasksList = [...this.state.tasks];
+    newTasksList.forEach((t) => {
+      if (t.id === task.id) {
+        t.isDone = task.isDone;
+        return;
+      }
+    });
+    this.setState({
+      tasks: newTasksList
+    });
+  }
+
   render() {
     return (
         <div className="react_todolist">
-          <ToDoListTaskCreator parentCreateNewTask={this.parentCreateNewTask.bind(this)}/>
-          <ToDoListTasksList parentDeleteTask={this.parentDeleteTask.bind(this)}  tasks={this.state.tasks}/>
+          <ToDoListTaskCreator
+              parentCreateNewTask={this.parentCreateNewTask.bind(this)}/>
+          <ToDoListTasksList
+              parentUpdateCallback={this.parentUpdateTask.bind(this)}
+              parentDeleteTask={this.parentDeleteTask.bind(this)}
+              tasks={this.state.tasks}/>
           <ToDoListFooter/>
         </div>
     );
