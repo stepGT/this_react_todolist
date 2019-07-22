@@ -24,7 +24,7 @@ class ToDoList extends Component {
     }
   }
 
-  deleteTask(taskId) {
+  parentDeleteTask(taskId) {
     let newTasksList = this.state.tasks.filter((t) => {
       return t.id !== taskId
     });
@@ -43,7 +43,7 @@ class ToDoList extends Component {
     return (
         <div className="react_todolist">
           <ToDoListTaskCreator parentCreateNewTask={this.parentCreateNewTask.bind(this)}/>
-          <ToDoListTasksList tasks={this.state.tasks}/>
+          <ToDoListTasksList parentDeleteTask={this.parentDeleteTask.bind(this)}  tasks={this.state.tasks}/>
           <ToDoListFooter/>
         </div>
     );

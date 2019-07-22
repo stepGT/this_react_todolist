@@ -7,16 +7,13 @@ class ToDoListTasksList extends Component {
     super(props);
   }
 
-  deleteTask() {
-
-  }
-
   render() {
     return (
         <div className="react_todolist__tasks">
           {this.props.tasks.map((task) => {
-            return <ToDoListTask deleteCallback={this.deleteTask.bind(this)}
-                                 key={task.id} task={task}/>
+            return <ToDoListTask
+                deleteCallback={this.props.parentDeleteTask.bind(this)}
+                key={task.id} task={task}/>
           })}
         </div>
     );
