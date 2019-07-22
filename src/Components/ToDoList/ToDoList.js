@@ -11,12 +11,12 @@ class ToDoList extends Component {
     this.state = {
       tasks: [
         {
-          id: 1,
+          id: 0,
           title: 'Learn JS',
           isDone: false
         },
         {
-          id: 2,
+          id: 1,
           title: 'Learn ReactJS',
           isDone: false
         }
