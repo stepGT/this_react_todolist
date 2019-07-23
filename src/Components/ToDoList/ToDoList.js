@@ -19,7 +19,8 @@ class ToDoList extends Component {
           title: 'Learn ReactJS',
           isDone: false
         }
-      ]
+      ],
+      filter: 'all'
     }
   }
 
@@ -52,6 +53,7 @@ class ToDoList extends Component {
   }
 
   render() {
+    let {tasks, filter} = this.state;
     return (
         <div className="react_todolist">
           <ToDoListTaskCreator
@@ -59,8 +61,8 @@ class ToDoList extends Component {
           <ToDoListTasksList
               parentUpdateCallback={this.parentUpdateTask.bind(this)}
               parentDeleteTask={this.parentDeleteTask.bind(this)}
-              tasks={this.state.tasks}/>
-          <ToDoListFooter tasks={this.state.tasks}/>
+              tasks={tasks}/>
+          <ToDoListFooter filter={filter} tasks={tasks}/>
         </div>
     );
   };
