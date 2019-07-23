@@ -52,6 +52,12 @@ class ToDoList extends Component {
     });
   }
 
+  parentChangeFilter(filterValue) {
+    this.setState({
+      filter: filterValue
+    });
+  }
+
   render() {
     let {tasks, filter} = this.state;
     return (
@@ -62,7 +68,7 @@ class ToDoList extends Component {
               parentUpdateCallback={this.parentUpdateTask.bind(this)}
               parentDeleteTask={this.parentDeleteTask.bind(this)}
               tasks={tasks}/>
-          <ToDoListFooter filter={filter} tasks={tasks}/>
+          <ToDoListFooter parentChangeFilter={this.parentChangeFilter.bind(this)} filter={filter} tasks={tasks}/>
         </div>
     );
   };

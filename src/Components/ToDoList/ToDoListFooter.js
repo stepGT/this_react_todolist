@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class ToDoListFooter extends Component {
   handleFilterChanged(e) {
-
+    this.props.parentChangeFilter(e.currentTarget.dataset.value);
   }
 
   render() {
