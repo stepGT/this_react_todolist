@@ -58,6 +58,12 @@ class ToDoList extends Component {
     });
   }
 
+  parentClearCompleted() {
+    this.setState({
+      tasks: this.state.tasks.filter(t => !t.isDone)
+    });
+  }
+
   render() {
     let {tasks, filter} = this.state;
     let filteredTasks = [];
@@ -82,7 +88,7 @@ class ToDoList extends Component {
               parentUpdateCallback={this.parentUpdateTask.bind(this)}
               parentDeleteTask={this.parentDeleteTask.bind(this)}
               tasks={filteredTasks}/>
-          <ToDoListFooter parentChangeFilter={this.parentChangeFilter.bind(this)} filter={filter} tasks={filteredTasks}/>
+          <ToDoListFooter parentClearCompleted={this.parentClearCompleted.bind(this)} parentChangeFilter={this.parentChangeFilter.bind(this)} filter={filter} tasks={filteredTasks}/>
         </div>
     );
   };

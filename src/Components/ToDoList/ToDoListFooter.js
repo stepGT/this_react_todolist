@@ -6,7 +6,7 @@ class ToDoListFooter extends Component {
   }
 
   render() {
-    let {tasks, filter} = this.props;
+    let {tasks, filter, parentClearCompleted} = this.props;
     return (
         <div className="react_todolist__footer">
           <div>
@@ -28,7 +28,9 @@ class ToDoListFooter extends Component {
             </button>
           </div>
           <div>
-            Clear completed
+            <button onClick={parentClearCompleted}>
+              Clear completed
+            </button>
           </div>
         </div>
     );
