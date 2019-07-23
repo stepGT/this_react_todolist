@@ -60,6 +60,20 @@ class ToDoList extends Component {
 
   render() {
     let {tasks, filter} = this.state;
+    let filteredTasks = [];
+    switch (filter) {
+      case 'all':
+        filteredTasks = tasks;
+        break;
+      case 'active':
+        filteredTasks = tasks.filter((t) => !t.isDone);
+        break;
+      case 'completed':
+        filteredTasks = tasks.filter((t) => t.isDone);
+        break;
+      default:
+        filteredTasks = tasks;
+    }
     return (
         <div className="react_todolist">
           <ToDoListTaskCreator
@@ -67,8 +81,8 @@ class ToDoList extends Component {
           <ToDoListTasksList
               parentUpdateCallback={this.parentUpdateTask.bind(this)}
               parentDeleteTask={this.parentDeleteTask.bind(this)}
-              tasks={tasks}/>
-          <ToDoListFooter parentChangeFilter={this.parentChangeFilter.bind(this)} filter={filter} tasks={tasks}/>
+              tasks={filteredTasks}/>
+          <ToDoListFooter parentChangeFilter={this.parentChangeFilter.bind(this)} filter={filter} tasks={filteredTasks}/>
         </div>
     );
   };
