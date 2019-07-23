@@ -5,7 +5,7 @@ class ToDoListFooter extends Component {
     return (
         <div className="react_todolist__footer">
           <div>
-            <span>5 items left</span>
+            <span>{this.props.tasks.filter((t) => !t.isDone).length} items left</span>
           </div>
           <div className="react_todolist__footer_buttons">
             <button className="active">All</button>

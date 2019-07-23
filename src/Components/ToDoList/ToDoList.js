@@ -60,7 +60,7 @@ class ToDoList extends Component {
               parentUpdateCallback={this.parentUpdateTask.bind(this)}
               parentDeleteTask={this.parentDeleteTask.bind(this)}
               tasks={this.state.tasks}/>
-          <ToDoListFooter/>
+          <ToDoListFooter tasks={this.state.tasks}/>
         </div>
     );
   };
