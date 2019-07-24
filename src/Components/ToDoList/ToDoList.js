@@ -10,7 +10,26 @@ class ToDoList extends Component {
     this.state = {
       tasks: [],
       filter: 'all'
-    }
+    };
+    fetch('https://repetitora.net/api/JS/Tasks?widgetId=53236&count=50', {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'accept': 'application/json'
+      },
+      mode: 'cors'
+    })
+        .then(result => result.json())
+        .then(data => {
+          let tasks = data.map((item) => {
+            return {
+              id: item.id,
+              title: item.title,
+              isDone: item.done
+            }
+          });
+          this.setState({tasks: tasks});
+        });
   }
 
   parentDeleteTask(taskId) {
