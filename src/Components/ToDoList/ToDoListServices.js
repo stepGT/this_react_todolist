@@ -5,6 +5,12 @@ const headers = {
 const apiURL = 'https://repetitora.net/api/JS/Tasks';
 const corsMode = 'cors';
 
+/**
+ *
+ * @param url
+ * @param type
+ * @param body
+ */
 function requestData(url, type, body) {
   return fetch(url,
       {
@@ -16,10 +22,23 @@ function requestData(url, type, body) {
       .then(result => result.json());
 }
 
-export function createTaskService(title, widgetId) {
+/**
+ *
+ * @param title
+ * @param widgetId
+ */
+export function ToDoListServicesCreateTask(title, widgetId) {
   const data = new URLSearchParams();
   data.append('widgetId', widgetId);
   data.append('title', title);
   //
   return requestData(apiURL, 'POST', data);
+}
+
+/**
+ *
+ * @param widgetId
+ */
+export function ToDoListServicesGetTasks(widgetId) {
+  return requestData(`${apiURL}?widgetId=${widgetId}&count=30`, 'GET', null);
 }
