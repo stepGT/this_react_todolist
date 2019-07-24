@@ -8,18 +8,7 @@ class ToDoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [
-        {
-          id: 0,
-          title: 'Learn JS',
-          isDone: false
-        },
-        {
-          id: 1,
-          title: 'Learn ReactJS',
-          isDone: false
-        }
-      ],
+      tasks: [],
       filter: 'all'
     }
   }

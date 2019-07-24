@@ -1,17 +1,12 @@
 import React, {Component} from 'react';
 
 class ToDoListTaskCreator extends Component {
-
-  constructor(props) {
-    super(props);
-    this.newIndex = 2;
-  }
-
   createNewTask(e) {
     if (e.key === 'Enter') {
       const data = new URLSearchParams();
+      const newTaskInput = e.currentTarget;
       data.append('widgetId', 53236);
-      data.append('title', e.currentTarget.value);
+      data.append('title', newTaskInput.value);
       fetch('https://repetitora.net/api/JS/Tasks', {
         method: 'POST',
         body: data,
@@ -23,16 +18,14 @@ class ToDoListTaskCreator extends Component {
       })
           .then(result => result.json())
           .then(data => {
-            console.log(data);
+            const newTask = {
+              title: data.task.title,
+              isDone: data.task.done,
+              id: data.task.id
+            };
+            this.props.parentCreateNewTask(newTask);
+            newTaskInput.value = '';
           });
-      const newTask = {
-        title: e.currentTarget.value,
-        isDone: false,
-        id: this.newIndex
-      };
-      this.props.parentCreateNewTask(newTask);
-      e.currentTarget.value = '';
-      this.newIndex++;
     }
   }
 
