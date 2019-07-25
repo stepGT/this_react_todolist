@@ -4,6 +4,7 @@ import {ToDoListUpdateTask} from './ToDoListServices';
 class ToDoListTask extends Component {
   constructor(props) {
     super(props);
+    this.state = {editMode: false};
     this.parentDeleteCallback = props.deleteCallback;
     this.parentUpdateCallback = props.updateCallback;
   }
@@ -24,12 +25,17 @@ class ToDoListTask extends Component {
   }
 
   render() {
-    let isDone = this.props.task.isDone ? 'react_todolist__task done' : 'react_todolist__task';
+    let {title, isDone} = this.props.task;
+    let isDoneClass = isDone ? 'react_todolist__task done' : 'react_todolist__task';
+    let displayTitle = this.state.editMode ?
+        <input type="text" value={title} onChange={()=>{}}/> : <span>{title}</span>;
     return (
-        <div className={isDone}>
-          <input checked={this.props.task.isDone} onChange={this.toggleTaskStatus.bind(this)} type="checkbox"/>
-          {this.props.task.title}
-          <span onClick={this.deleteTask.bind(this)} className="react_todolist__delete">x</span>
+        <div className={isDoneClass}>
+          <input checked={isDone} onChange={this.toggleTaskStatus.bind(this)}
+                 type="checkbox"/>
+          {displayTitle}
+          <span onClick={this.deleteTask.bind(this)}
+                className="react_todolist__delete">x</span>
         </div>
     );
   };
