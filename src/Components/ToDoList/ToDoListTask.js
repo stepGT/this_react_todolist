@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {ToDoListUpdateTask} from './ToDoListServices';
 
 class ToDoListTask extends Component {
   constructor(props) {
@@ -16,7 +17,10 @@ class ToDoListTask extends Component {
       ...this.props.task
     };
     task.isDone = !task.isDone;
-    this.parentUpdateCallback(task);
+    ToDoListUpdateTask(53236, task.title, task.isDone)
+        .then(data => {
+          this.parentUpdateCallback(task);
+        });
   }
 
   render() {

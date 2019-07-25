@@ -42,3 +42,23 @@ export function ToDoListServicesCreateTask(title, widgetId) {
 export function ToDoListServicesGetTasks(widgetId) {
   return requestData(`${apiURL}?widgetId=${widgetId}&count=30`, 'GET', null);
 }
+
+/**
+ *
+ * @param title
+ * @param isDone
+ * @param widgetId
+ */
+export function ToDoListUpdateTask(widgetId, title = null, isDone = null) {
+  const data = new URLSearchParams();
+  data.append('widgetId', widgetId);
+  //
+  if (title !== null) {
+    data.append('title', title);
+  }
+  else if (isDone !== null) {
+    data.append('done', isDone);
+  }
+  //
+  return requestData(apiURL, 'PUT', data);
+}
