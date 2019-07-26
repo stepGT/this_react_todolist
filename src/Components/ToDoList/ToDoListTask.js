@@ -4,7 +4,10 @@ import {ToDoListUpdateTask} from './ToDoListServices';
 class ToDoListTask extends Component {
   constructor(props) {
     super(props);
-    this.state = {editMode: false};
+    this.state = {
+      editMode: false,
+      title: props.task.title
+    };
     this.parentDeleteCallback = props.deleteCallback;
     this.parentUpdateCallback = props.updateCallback;
   }
@@ -28,7 +31,7 @@ class ToDoListTask extends Component {
     this.setState({editMode: true});
   }
 
-  ToDoListTaskOnBlur(e) {
+  ToDoListTaskSaveTitle(e) {
     let newTitle = e.currentTarget.value;
     let task = {
       ...this.props.task
@@ -41,11 +44,16 @@ class ToDoListTask extends Component {
         });
   }
 
+  ToDoListTaskChangeTitle(e) {
+    this.setState({title: e.currentTarget.value});
+  }
+
   render() {
-    let {title, isDone} = this.props.task;
+    let {isDone} = this.props.task;
+    let {title} = this.state;
     let isDoneClass = isDone ? 'react_todolist__task done' : 'react_todolist__task';
     let displayTitle = this.state.editMode ?
-        <input type="text" value={title} onChange={()=>{}}/> : <span onDoubleClick={this.ToDoListTaskEditMode.bind(this)} onBlur={this.ToDoListTaskOnBlur.bind(this)}>{title}</span>;
+        <input type="text" value={title} onChange={this.ToDoListTaskChangeTitle.bind(this)} onBlur={this.ToDoListTaskSaveTitle.bind(this)}/> : <span onDoubleClick={this.ToDoListTaskEditMode.bind(this)}>{title}</span>;
     return (
         <div className={isDoneClass}>
           <input checked={isDone} onChange={this.toggleTaskStatus.bind(this)}
