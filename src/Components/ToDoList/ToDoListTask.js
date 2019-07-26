@@ -18,8 +18,25 @@ class ToDoListTask extends Component {
       ...this.props.task
     };
     task.isDone = !task.isDone;
-    ToDoListUpdateTask(53236, task.title, task.isDone)
+    ToDoListUpdateTask(53236, task.id, task.title, task.isDone)
         .then(data => {
+          this.parentUpdateCallback(task);
+        });
+  }
+
+  ToDoListTaskEditMode() {
+    this.setState({editMode: true});
+  }
+
+  ToDoListTaskOnBlur(e) {
+    let newTitle = e.currentTarget.value;
+    let task = {
+      ...this.props.task
+    };
+    task.title = newTitle;
+    ToDoListUpdateTask(53236, task.id, newTitle, null)
+        .then(data => {
+          this.setState({editMode: false});
           this.parentUpdateCallback(task);
         });
   }
@@ -28,7 +45,7 @@ class ToDoListTask extends Component {
     let {title, isDone} = this.props.task;
     let isDoneClass = isDone ? 'react_todolist__task done' : 'react_todolist__task';
     let displayTitle = this.state.editMode ?
-        <input type="text" value={title} onChange={()=>{}}/> : <span>{title}</span>;
+        <input type="text" value={title} onChange={()=>{}}/> : <span onDoubleClick={this.ToDoListTaskEditMode.bind(this)} onBlur={this.ToDoListTaskOnBlur.bind(this)}>{title}</span>;
     return (
         <div className={isDoneClass}>
           <input checked={isDone} onChange={this.toggleTaskStatus.bind(this)}

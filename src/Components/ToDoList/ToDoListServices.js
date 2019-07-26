@@ -48,10 +48,12 @@ export function ToDoListServicesGetTasks(widgetId) {
  * @param title
  * @param isDone
  * @param widgetId
+ * @param taskId
  */
-export function ToDoListUpdateTask(widgetId, title = null, isDone = null) {
+export function ToDoListUpdateTask(widgetId, taskId, title = null, isDone = null) {
   const data = new URLSearchParams();
   data.append('widgetId', widgetId);
+  data.append('taskId', taskId);
   //
   if (title !== null) {
     data.append('title', title);
