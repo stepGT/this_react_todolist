@@ -8,6 +8,46 @@ import {ToDoListServicesGetTasks} from './ToDoListServices';
 class ToDoList extends Component {
   constructor(props) {
     super(props);
+    let ToDoListState = {
+      tasks: [{
+        id: 1,
+        title: 'Learn ReactJS',
+        isDone: false
+      }],
+      filter: 'all'
+    };
+    const changeFilterAction = {
+      type: 'CHANGE_FILTER'
+    };
+    const createNewTaskAction = {
+      type: 'CREATE_NEW_TASK',
+      id: 2,
+      title: 'Learn JavaScript',
+      isDone: true
+    };
+
+    function ToDoListReducer(oldstate, action) {
+      switch (action.type) {
+        case 'CHANGE_FILTER':
+          return {
+            ...oldstate,
+            filter: 'completed'
+          };
+          break;
+        case 'CREATE_NEW_TASK':
+          return {
+            ...oldstate,
+            tasks: [...oldstate.tasks, {
+              id: action.id,
+              title: action.title,
+              isDone: action.isDone,
+            }]
+          };
+          break;
+      }
+    }
+    ToDoListState = ToDoListReducer(ToDoListState, changeFilterAction);
+    ToDoListState = ToDoListReducer(ToDoListState, createNewTaskAction);
     this.state = {
       tasks: [],
       filter: 'all'
