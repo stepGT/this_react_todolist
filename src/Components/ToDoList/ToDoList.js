@@ -4,36 +4,26 @@ import ToDoListFooter from './ToDoListFooter';
 import ToDoListTaskCreator from './ToDoListTaskCreator';
 import ToDoListTasksList from './ToDoListTasksList';
 import {ToDoListServicesGetTasks} from './ToDoListServices';
+import {createStore, combineReducers} from 'redux';
 
 class ToDoList extends Component {
   constructor(props) {
     super(props);
-    let ToDoListState = {
+
+    function ToDoListReducer(oldstate = {
       tasks: [{
         id: 1,
         title: 'Learn ReactJS',
         isDone: false
       }],
       filter: 'all'
-    };
-    const changeFilterAction = {
-      type: 'CHANGE_FILTER'
-    };
-    const createNewTaskAction = {
-      type: 'CREATE_NEW_TASK',
-      id: 2,
-      title: 'Learn JavaScript',
-      isDone: true
-    };
-
-    function ToDoListReducer(oldstate, action) {
+    }, action) {
       switch (action.type) {
         case 'CHANGE_FILTER':
           return {
             ...oldstate,
             filter: 'completed'
           };
-          break;
         case 'CREATE_NEW_TASK':
           return {
             ...oldstate,
@@ -43,11 +33,15 @@ class ToDoList extends Component {
               isDone: action.isDone,
             }]
           };
-          break;
+        default:
+          return oldstate
       }
     }
-    ToDoListState = ToDoListReducer(ToDoListState, changeFilterAction);
-    ToDoListState = ToDoListReducer(ToDoListState, createNewTaskAction);
+    //
+    let reducers = combineReducers({ToDoListReducer});
+    let store = createStore(reducers);
+    let state = store.getState();
+    console.log(state);
     this.state = {
       tasks: [],
       filter: 'all'
