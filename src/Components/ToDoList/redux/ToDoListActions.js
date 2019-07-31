@@ -39,3 +39,16 @@ export const putTasksActionCreator = (tasks) => {
     tasks: tasks
   }
 };
+/**
+ *
+ * @param tasks
+ * @returns {{type: string, id, title, isDone: *}}
+ */
+export const createNewTaskCreator = (tasks) => {
+  return {
+    type: c.CREATE_NEW_TASK,
+    id: tasks.id,
+    title: tasks.title,
+    isDone: tasks.isDone
+  }
+};

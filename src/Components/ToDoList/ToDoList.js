@@ -8,7 +8,7 @@ import {createStore} from 'redux';
 import {ToDoListReducer} from './redux/ToDoListReducers';
 import {
   changeFilterCreator,
-  clearCompletedCreator,
+  clearCompletedCreator, createNewTaskCreator,
   putTasksActionCreator
 } from './redux/ToDoListActions';
 
@@ -46,9 +46,7 @@ class ToDoList extends Component {
   }
 
   parentCreateNewTask(task) {
-    this.setState({
-      tasks: [...this.state.tasks, task]
-    });
+    this.store.dispatch(createNewTaskCreator(task));
   }
 
   parentUpdateTask(task) {
