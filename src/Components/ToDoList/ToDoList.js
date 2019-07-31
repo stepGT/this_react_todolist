@@ -33,8 +33,6 @@ class ToDoList extends Component {
       });
       let action = putTasksActionCreator(tasks);
       this.store.dispatch(action);
-      let state = this.store.getState();
-      this.setState(state);
     });
   }
 
@@ -67,15 +65,11 @@ class ToDoList extends Component {
   }
 
   parentChangeFilter(filterValue) {
-    this.setState({
-      filter: filterValue
-    });
+    this.store.dispatch(changeFilterCreator(filterValue));
   }
 
   parentClearCompleted() {
-    this.setState({
-      tasks: this.state.tasks.filter(t => !t.isDone)
-    });
+    this.store.dispatch(clearCompletedCreator());
   }
 
   render() {

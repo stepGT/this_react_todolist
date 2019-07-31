@@ -12,7 +12,7 @@ export function ToDoListReducer(oldstate, action) {
     case c.CHANGE_FILTER:
       return {
         ...oldstate,
-        filter: 'completed'
+        filter: action.value
       };
     case c.CREATE_NEW_TASK:
       return {
@@ -27,6 +27,11 @@ export function ToDoListReducer(oldstate, action) {
       return {
         ...oldstate,
         tasks: [...oldstate.tasks, ...action.tasks]
+      };
+    case c.CLEAR_COMPLETED:
+      return {
+        ...oldstate,
+        tasks: oldstate.tasks.filter(t => !t.isDone)
       };
     default:
       if (!!oldstate) {

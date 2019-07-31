@@ -5,24 +5,28 @@
 export const c = {
   CHANGE_FILTER: 'CHANGE_FILTER',
   CREATE_NEW_TASK: 'CREATE_NEW_TASK',
-  PUT_TASKS: 'PUT_TASKS'
+  PUT_TASKS: 'PUT_TASKS',
+  CLEAR_COMPLETED: 'CLEAR_COMPLETED',
 };
 /**
  *
- * @type {{type: string}}
+ * @returns {{type: string}}
  */
-export const changeFilterAction = {
-  type: c.CHANGE_FILTER
+export const clearCompletedCreator = () => {
+  return {
+    type: c.CLEAR_COMPLETED
+  }
 };
 /**
  *
- * @type {{type: string, id: number, title: string, isDone: boolean}}
+ * @param filterValue
+ * @returns {{type: string, value: *}}
  */
-export const createNewTaskAction = {
-  type: c.CREATE_NEW_TASK,
-  id: 2,
-  title: 'Learn ReactJS',
-  isDone: false
+export const changeFilterCreator = (filterValue) => {
+  return {
+    type: c.CHANGE_FILTER,
+    value: filterValue
+  }
 };
 /**
  *
