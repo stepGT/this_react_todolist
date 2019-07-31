@@ -6,13 +6,22 @@ import ToDoListTasksList from './ToDoListTasksList';
 import {ToDoListServicesGetTasks} from './ToDoListServices';
 import {createStore} from 'redux';
 import {ToDoListReducer} from './redux/ToDoListReducers';
-import {putTasksActionCreator} from './redux/ToDoListActions';
+import {
+  changeFilterCreator,
+  clearCompletedCreator,
+  putTasksActionCreator
+} from './redux/ToDoListActions';
 
 class ToDoList extends Component {
   constructor(props) {
     super(props);
     this.store = createStore(ToDoListReducer);
     this.state = this.store.getState();
+    // subscribe to store changes
+    this.store.subscribe(() => {
+      let state = this.store.getState();
+      this.setState(state);
+    });
     //
     ToDoListServicesGetTasks(53236).then(data => {
       let tasks = data.map((item) => {
