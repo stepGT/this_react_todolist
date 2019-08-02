@@ -46,6 +46,11 @@ export function ToDoListReducer(oldstate, action) {
           }
         });
         return newState;
+    case c.DELETE_TASK:
+      return {
+        ...oldstate,
+        tasks: oldstate.tasks.filter(t => t.id !== action.id)
+      };
     default:
       if (!!oldstate) {
         return oldstate;

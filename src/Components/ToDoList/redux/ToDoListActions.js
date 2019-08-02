@@ -7,7 +7,8 @@ export const c = {
   CREATE_NEW_TASK: 'CREATE_NEW_TASK',
   PUT_TASKS: 'PUT_TASKS',
   CLEAR_COMPLETED: 'CLEAR_COMPLETED',
-  UPDATE_TASK: 'UPDATE_TASK'
+  UPDATE_TASK: 'UPDATE_TASK',
+  DELETE_TASK: 'DELETE_TASK'
 };
 /**
  *
@@ -66,5 +67,16 @@ export const updateTaskCreator = ({id, isDone, title}) => {
     id: id,
     isDone: isDone,
     title: title
+  }
+};
+/**
+ *
+ * @param taskId
+ * @returns {{type: string, id: *}}
+ */
+export const deleteTaskCreator = (taskId) => {
+  return {
+    type: c.DELETE_TASK,
+    id: taskId
   }
 };
