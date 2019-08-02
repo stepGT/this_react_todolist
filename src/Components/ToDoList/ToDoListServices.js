@@ -64,3 +64,16 @@ export function ToDoListUpdateTask(widgetId, taskId, title = null, isDone = null
   //
   return requestData(apiURL, 'PUT', data);
 }
+
+/**
+ *
+ * @param widgetId
+ * @param taskId
+ */
+export function ToDoListDeleteTask(widgetId, taskId) {
+  const data = new URLSearchParams();
+  data.append('widgetId', widgetId);
+  data.append('taskId', taskId);
+  //
+  return requestData(apiURL, 'DELETE', data);
+}

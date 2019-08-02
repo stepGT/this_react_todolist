@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ToDoListUpdateTask} from './ToDoListServices';
+import {ToDoListDeleteTask, ToDoListUpdateTask} from './ToDoListServices';
 
 class ToDoListTask extends Component {
   constructor(props) {
@@ -13,7 +13,13 @@ class ToDoListTask extends Component {
   }
 
   deleteTask() {
-    this.parentDeleteCallback(this.props.task.id);
+    let task = {
+      ...this.props.task
+    };
+    ToDoListDeleteTask(53236, task.id)
+        .then(data => {
+          this.parentDeleteCallback(this.props.task.id);
+        });
   }
 
   toggleTaskStatus() {
