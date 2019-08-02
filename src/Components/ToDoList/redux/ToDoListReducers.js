@@ -33,6 +33,19 @@ export function ToDoListReducer(oldstate, action) {
         ...oldstate,
         tasks: oldstate.tasks.filter(t => !t.isDone)
       };
+    case c.UPDATE_TASK:
+        let newState = {...oldstate};
+        newState.tasks = [...newState.tasks];
+        newState.tasks.forEach((task, index) => {
+          if (task.id === action.id) {
+            newState.tasks[index] = {
+              ...task,
+              isDone: action.isDone,
+              title: action.title
+            }
+          }
+        });
+        return newState;
     default:
       if (!!oldstate) {
         return oldstate;

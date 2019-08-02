@@ -9,7 +9,7 @@ import {ToDoListReducer} from './redux/ToDoListReducers';
 import {
   changeFilterCreator,
   clearCompletedCreator, createNewTaskCreator,
-  putTasksActionCreator
+  putTasksActionCreator, updateTaskCreator
 } from './redux/ToDoListActions';
 
 class ToDoList extends Component {
@@ -50,16 +50,7 @@ class ToDoList extends Component {
   }
 
   parentUpdateTask(task) {
-    const newTasksList = [...this.state.tasks];
-    newTasksList.forEach((t) => {
-      if (t.id === task.id) {
-        t.isDone = task.isDone;
-        return;
-      }
-    });
-    this.setState({
-      tasks: newTasksList
-    });
+    this.store.dispatch(updateTaskCreator(task));
   }
 
   parentChangeFilter(filterValue) {
