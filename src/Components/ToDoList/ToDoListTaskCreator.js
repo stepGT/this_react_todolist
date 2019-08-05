@@ -1,20 +1,32 @@
 import React, {Component} from 'react';
 import {ToDoListServicesCreateTask} from './ToDoListServices';
 
+class ToDoListFormContainer extends Component {
+  createTask(title) {
+    ToDoListServicesCreateTask(title, 53236)
+        .then(data => {
+          const newTask = {
+            title: data.task.title,
+            isDone: data.task.done,
+            id: data.task.id
+          };
+          this.props.parentCreateNewTask(newTask);
+          //newTaskInput.value = '';
+        });
+  }
+
+  render() {
+    return (
+        <ToDoListTaskCreator createTask={this.createTask.bind(this)}/>
+    );
+  }
+}
+
 const ToDoListTaskCreator = (props) => {
   const createNewTask = (e) => {
     if (e.key === 'Enter') {
       const newTaskInput = e.currentTarget;
-      ToDoListServicesCreateTask(newTaskInput.value, 53236)
-          .then(data => {
-            const newTask = {
-              title: data.task.title,
-              isDone: data.task.done,
-              id: data.task.id
-            };
-            props.parentCreateNewTask(newTask);
-            newTaskInput.value = '';
-          });
+      props.createTask(newTaskInput);
     }
   };
   return (
@@ -23,4 +35,4 @@ const ToDoListTaskCreator = (props) => {
       </div>
   );
 };
-export default ToDoListTaskCreator;
+export default ToDoListFormContainer;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './ToDoList.scss';
 import ToDoListFooter from './ToDoListFooter';
-import ToDoListTaskCreator from './ToDoListTaskCreator';
+import ToDoListFormContainer from './ToDoListTaskCreator';
 import ToDoListTasksList from './ToDoListTasksList';
 import {ToDoListServicesGetTasks} from './ToDoListServices';
 import {createStore} from 'redux';
@@ -74,7 +74,7 @@ class ToDoList extends Component {
     }
     return (
         <div className="react_todolist">
-          <ToDoListTaskCreator
+          <ToDoListFormContainer
               parentCreateNewTask={this.parentCreateNewTask.bind(this)}/>
           <ToDoListTasksList
               parentUpdateCallback={this.parentUpdateTask.bind(this)}
