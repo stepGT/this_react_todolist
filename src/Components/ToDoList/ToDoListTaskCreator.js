@@ -26,7 +26,7 @@ const ToDoListTaskCreator = (props) => {
   const createNewTask = (e) => {
     if (e.key === 'Enter') {
       const newTaskInput = e.currentTarget;
-      props.createTask(newTaskInput);
+      props.createTask(newTaskInput.value);
     }
   };
   return (
