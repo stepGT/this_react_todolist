@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {ToDoListDeleteTask, ToDoListUpdateTask} from './ToDoListServices';
+import {deleteTaskCreator} from './redux/ToDoListActions';
 
 class ToDoListTask extends Component {
   constructor(props) {
@@ -8,18 +9,11 @@ class ToDoListTask extends Component {
       editMode: false,
       title: props.task.title
     };
-    this.parentDeleteCallback = props.deleteCallback;
     this.parentUpdateCallback = props.updateCallback;
   }
 
   deleteTask() {
-    let task = {
-      ...this.props.task
-    };
-    ToDoListDeleteTask(53236, task.id)
-        .then(data => {
-          this.parentDeleteCallback(this.props.task.id);
-        });
+    ToDoListDeleteTask(53236, this.props.task.id).then(() => {this.props.store.dispatch(deleteTaskCreator(this.props.task.id))});
   }
 
   toggleTaskStatus() {

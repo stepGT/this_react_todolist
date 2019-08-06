@@ -8,7 +8,7 @@ import {createStore} from 'redux';
 import {ToDoListReducer} from './redux/ToDoListReducers';
 import {
   changeFilterCreator,
-  clearCompletedCreator, createNewTaskCreator, deleteTaskCreator,
+  clearCompletedCreator, createNewTaskCreator,
   putTasksActionCreator, updateTaskCreator
 } from './redux/ToDoListActions';
 
@@ -34,10 +34,6 @@ class ToDoList extends Component {
       let action = putTasksActionCreator(tasks);
       this.store.dispatch(action);
     });
-  }
-
-  parentDeleteTask(taskId) {
-    this.store.dispatch(deleteTaskCreator(taskId));
   }
 
   parentCreateNewTask(task) {
@@ -77,8 +73,8 @@ class ToDoList extends Component {
           <ToDoListFormContainer
               parentCreateNewTask={this.parentCreateNewTask.bind(this)}/>
           <ToDoListTasksList
+              store={this.store}
               parentUpdateCallback={this.parentUpdateTask.bind(this)}
-              parentDeleteTask={this.parentDeleteTask.bind(this)}
               tasks={filteredTasks}/>
           <ToDoListFooter parentClearCompleted={this.parentClearCompleted.bind(this)} parentChangeFilter={this.parentChangeFilter.bind(this)} filter={filter} tasks={filteredTasks}/>
         </div>
