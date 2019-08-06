@@ -55,11 +55,11 @@ export function ToDoListUpdateTask(widgetId, taskId, title = null, isDone = null
   data.append('widgetId', widgetId);
   data.append('taskId', taskId);
   //
-  if (title !== null) {
-    data.append('title', title);
-  }
-  else if (isDone !== null) {
+  if (isDone !== null) {
     data.append('done', isDone);
+  }
+  else if (title !== null) {
+    data.append('title', title);
   }
   //
   return requestData(apiURL, 'PUT', data);

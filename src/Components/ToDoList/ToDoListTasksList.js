@@ -6,10 +6,7 @@ class ToDoListTasksList extends Component {
     return (
         <div className="react_todolist__tasks">
           {this.props.tasks.map((task) => {
-            return <ToDoListTask
-                store={this.props.store}
-                updateCallback={this.props.parentUpdateCallback.bind(this)}
-                key={task.id} task={task}/>
+            return <ToDoListTask store={this.props.store} key={task.id} task={task}/>
           })}
         </div>
     );

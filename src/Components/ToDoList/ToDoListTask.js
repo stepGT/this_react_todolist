@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {ToDoListDeleteTask, ToDoListUpdateTask} from './ToDoListServices';
-import {deleteTaskCreator} from './redux/ToDoListActions';
+import {deleteTaskCreator, updateTaskCreator} from './redux/ToDoListActions';
 
 class ToDoListTask extends Component {
   constructor(props) {
@@ -9,7 +9,6 @@ class ToDoListTask extends Component {
       editMode: false,
       title: props.task.title
     };
-    this.parentUpdateCallback = props.updateCallback;
   }
 
   deleteTask() {
@@ -22,8 +21,9 @@ class ToDoListTask extends Component {
     };
     task.isDone = !task.isDone;
     ToDoListUpdateTask(53236, task.id, task.title, task.isDone)
-        .then(data => {
-          this.parentUpdateCallback(task);
+        .then(() => {
+          this.setState({editMode: false});
+          this.props.store.dispatch(updateTaskCreator(task));
         });
   }
 
@@ -33,14 +33,11 @@ class ToDoListTask extends Component {
 
   ToDoListTaskSaveTitle(e) {
     let newTitle = e.currentTarget.value;
-    let task = {
-      ...this.props.task
-    };
-    task.title = newTitle;
-    ToDoListUpdateTask(53236, task.id, newTitle, null)
-        .then(data => {
+    this.props.task.title = newTitle;
+    ToDoListUpdateTask(53236, this.props.task.id, newTitle, null)
+        .then(() => {
           this.setState({editMode: false});
-          this.parentUpdateCallback(task);
+          this.props.store.dispatch(updateTaskCreator(this.props.task));
         });
   }
 
