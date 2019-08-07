@@ -6,11 +6,7 @@ import ToDoListTasksList from './ToDoListTasksList';
 import {ToDoListServicesGetTasks} from './ToDoListServices';
 import {createStore} from 'redux';
 import {ToDoListReducer} from './redux/ToDoListReducers';
-import {
-  changeFilterCreator,
-  clearCompletedCreator, createNewTaskCreator,
-  putTasksActionCreator
-} from './redux/ToDoListActions';
+import {createNewTaskCreator, putTasksActionCreator} from './redux/ToDoListActions';
 
 class ToDoList extends Component {
   constructor(props) {
@@ -40,14 +36,6 @@ class ToDoList extends Component {
     this.store.dispatch(createNewTaskCreator(task));
   }
 
-  parentChangeFilter(filterValue) {
-    this.store.dispatch(changeFilterCreator(filterValue));
-  }
-
-  parentClearCompleted() {
-    this.store.dispatch(clearCompletedCreator());
-  }
-
   render() {
     let {tasks, filter} = this.state;
     let filteredTasks = [];
@@ -69,7 +57,7 @@ class ToDoList extends Component {
           <ToDoListFormContainer
               parentCreateNewTask={this.parentCreateNewTask.bind(this)}/>
           <ToDoListTasksList store={this.store} tasks={filteredTasks}/>
-          <ToDoListFooter parentClearCompleted={this.parentClearCompleted.bind(this)} parentChangeFilter={this.parentChangeFilter.bind(this)} filter={filter} tasks={filteredTasks}/>
+          <ToDoListFooter store={this.store} filter={filter} tasks={filteredTasks}/>
         </div>
     );
   };

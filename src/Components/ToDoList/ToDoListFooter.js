@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
+import {changeFilterCreator, clearCompletedCreator} from './redux/ToDoListActions';
 
 class ToDoListFooter extends Component {
   handleFilterChanged(e) {
-    this.props.parentChangeFilter(e.currentTarget.dataset.value);
+    this.props.store.dispatch(changeFilterCreator(e.currentTarget.dataset.value));
+  }
+
+  clearCompleted() {
+    this.props.store.dispatch(clearCompletedCreator());
   }
 
   render() {
-    let {tasks, filter, parentClearCompleted} = this.props;
+    let {tasks, filter} = this.props;
     return (
         <div className="react_todolist__footer">
           <div>
@@ -28,7 +33,7 @@ class ToDoListFooter extends Component {
             </button>
           </div>
           <div>
-            <button onClick={parentClearCompleted}>
+            <button onClick={this.clearCompleted.bind(this)}>
               Clear completed
             </button>
           </div>
